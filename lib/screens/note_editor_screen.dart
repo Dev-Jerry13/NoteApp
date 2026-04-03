@@ -88,13 +88,6 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
     if (mounted) Navigator.pop(context);
   }
 
-  void _removeAttachment(AttachedFile file) {
-    setState(() {
-      _attachments = _attachments.where((f) => f.path != file.path).toList();
-    });
-    _handleAutoSave();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -158,12 +151,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
                 style: Theme.of(context).textTheme.bodyMedium,
               )
             else
-              ..._attachments.map(
-                (f) => AttachmentTile(
-                  file: f,
-                  onRemove: () => _removeAttachment(f),
-                ),
-              ),
+              ..._attachments.map((f) => AttachmentTile(file: f)),
           ],
         ),
       ),

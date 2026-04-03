@@ -9,11 +9,9 @@ class AttachmentTile extends StatelessWidget {
   const AttachmentTile({
     super.key,
     required this.file,
-    this.onRemove,
   });
 
   final AttachedFile file;
-  final VoidCallback? onRemove;
 
   IconData _resolveIcon() {
     switch (file.extension) {
@@ -38,29 +36,19 @@ class AttachmentTile extends StatelessWidget {
       leading: Icon(_resolveIcon()),
       title: Text(file.name),
       subtitle: Text(file.path),
-      trailing: Wrap(
-        spacing: 4,
-        children: [
-          IconButton(
-            icon: const Icon(Icons.open_in_new_rounded),
-            onPressed: () async {
-              if (!File(file.path).existsSync()) {
-                if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('File not found on disk')),
-                  );
-                }
-                return;
-              }
-              await OpenFilex.open(file.path);
-            },
-          ),
-          if (onRemove != null)
-            IconButton(
-              icon: const Icon(Icons.delete_outline_rounded),
-              onPressed: onRemove,
-            ),
-        ],
+      trailing: IconButton(
+        icon: const Icon(Icons.open_in_new_rounded),
+        onPressed: () async {
+          if (!File(file.path).existsSync()) {
+            if (context.mounted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('File not found on disk')),
+              );
+            }
+            return;
+          }
+          await OpenFilex.open(file.path);
+        },
       ),
     );
   }

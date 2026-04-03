@@ -13,7 +13,6 @@ A cross-platform Note Taking Mobile Application built with Flutter and focused o
 - Local storage only (no backend) with **Hive**
 - File attachments per note using **file_picker**
   - supported: `.txt`, `.pdf`, `.doc`, `.docx`, `.jpg`, `.jpeg`, `.png`
-  - attachments can be added and removed while editing a note
 - Search with debounce
 - Sort by updated date, created date, title
 - Grid/List toggle with animated transitions
